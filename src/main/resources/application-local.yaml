@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/barogo
+    username: user
+    password: 1234
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+    url: jdbc:mysql://localhost:3306/barogo
+    user: user
+    password: 1234
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
