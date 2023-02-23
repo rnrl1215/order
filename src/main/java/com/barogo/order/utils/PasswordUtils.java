@@ -1,6 +1,6 @@
 package com.barogo.order.utils;
 
-import com.barogo.order.exception.CustomException;
+import com.barogo.order.exception.CustomErrorCodeException;
 import org.springframework.util.StringUtils;
 
 import java.security.MessageDigest;
@@ -50,7 +50,7 @@ public class PasswordUtils {
         return password.matches(".*[^a-zA-Z0-9\\\\s].*");
     }
 
-    public static String getSecurePassword(String password, byte[] salt) throws CustomException {
+    public static String getSecurePassword(String password, byte[] salt) throws CustomErrorCodeException {
         StringBuilder sb = new StringBuilder();
 
         try {
@@ -62,7 +62,7 @@ public class PasswordUtils {
                 sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
             }
         } catch (NoSuchAlgorithmException e) {
-            throw new CustomException(FAIL_CREATE_PASSWORD);
+            throw new CustomErrorCodeException(FAIL_CREATE_PASSWORD);
         }
         return sb.toString();
     }

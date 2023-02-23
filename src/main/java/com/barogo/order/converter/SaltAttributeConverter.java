@@ -1,18 +1,17 @@
 package com.barogo.order.converter;
 
+import com.barogo.order.utils.Base64Utils;
 import jakarta.persistence.AttributeConverter;
-
-import java.util.Base64;
 
 public class SaltAttributeConverter implements AttributeConverter<byte[], String> {
 
     @Override
     public String convertToDatabaseColumn(byte[] attribute) {
-         return Base64.getEncoder().encodeToString(attribute);
+         return Base64Utils.convertByteArrayToString(attribute);
     }
 
     @Override
     public byte[] convertToEntityAttribute(String dbData) {
-        return Base64.getDecoder().decode(dbData);
+        return Base64Utils.convertStringToByteArray(dbData);
     }
 }

@@ -1,12 +1,12 @@
 package com.barogo.order.exception;
 
-import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
-@Getter
-public class CustomException extends RuntimeException{
-    private final ErrorCode errorCode;
-
-    public CustomException(ErrorCode errorCode) {
-        this.errorCode = errorCode;
+public abstract class CustomException extends RuntimeException {
+    public CustomException(String messge) {
+        super(messge);
     }
+
+    abstract HttpStatus getHttpStatus();
+    abstract String getErrorMessage();
 }
