@@ -7,22 +7,18 @@ public class MemberService {
 
 
 
-    public void passwordCheck(String password) throws CustomException {
+    public void checkPassword(String password) throws CustomException {
 
         boolean isUpperCase = false;
         boolean isLowerCase = false;
         boolean isSpecialCharacters = false;
         boolean isNumber = false;
 
-        for(int i = 0; i < password.length(); i++){
-            char charPassword = password.charAt(i);
-            if (!isUpperCase && Character.isUpperCase(password.charAt(charPassword))) {
-                isUpperCase = true;
-            } else if (!isLowerCase && Character.isLowerCase(charPassword)) {
-                isLowerCase = true;
-            } else if (!isNumber) {
+        boolean matches = password.matches("[0-9]");
+        boolean matches1 = password.matches("[a-z]");
+        boolean matches2 = password.matches("[A-Z]");
+        boolean matches3 = password.matches("[\\{\\}\\[\\]\\/?.,;:|\\)*~`!^\\-_+<>@\\#$%&\\\\\\=\\(\\'\\\"]");
 
-            }
-        }
+
     }
 }
