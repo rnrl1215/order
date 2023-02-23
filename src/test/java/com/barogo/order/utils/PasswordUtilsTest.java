@@ -5,13 +5,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 class PasswordUtilsTest {
 
     @Nested
     @DisplayName("소문자 포함 체크")
-    class CheckLowerCase {
+    class CheckLowerCaseTest {
         @Test
         void success() {
             // given
@@ -39,7 +40,7 @@ class PasswordUtilsTest {
 
     @Nested
     @DisplayName("대문자 포함 체크")
-    class CheckUpperCase {
+    class CheckUpperCaseTest {
         @Test
         void success() {
             // given
@@ -66,7 +67,7 @@ class PasswordUtilsTest {
 
     @Nested
     @DisplayName("숫자 포함 체크")
-    class CheckNumber {
+    class CheckNumberTest {
         @Test
         void success() {
             // given
@@ -94,7 +95,7 @@ class PasswordUtilsTest {
 
     @Nested
     @DisplayName("툭스 문자 포함 체크")
-    class checkSpecialCharacters {
+    class CheckSpecialCharactersTest {
         @Test
         void success() {
             // given
@@ -118,5 +119,46 @@ class PasswordUtilsTest {
             // then
             Assertions.assertThat(isFalse).isFalse();
         }
+    }
+
+    @Nested
+    @DisplayName("패스워드 체크")
+    class CheckPasswordTest {
+        @Test
+        void success() {
+            // given
+            String password = "Abcd@fghi12LMnop";
+
+            // when
+            boolean isOk = PasswordUtils.checkPassword(password);
+
+            // then
+            Assertions.assertThat(isOk).isTrue();
+        }
+
+        @Test
+        void fail() {
+            // given
+            String password = "AbcdfghiLMnop";
+
+            // when
+            boolean isFalse = PasswordUtils.checkPassword(password);
+
+            // then
+            Assertions.assertThat(isFalse).isFalse();
+        }
+    }
+
+    @Test
+    void encryptPassword() {
+        // given
+        byte[] salt = {22, 125, 17, 127, 80, 109, -108, -37, 108, 96, -6, -100, 38, -62, 0, -11};
+
+        // when
+        String test = PasswordUtils.getSecurePassword("test", salt);
+
+
+        // then
+        Assertions.assertThat(test).isEqualTo("3ccf8134609130c0bae13641e318066498b9080bae1459ce53bbbee35bf7940f");
     }
 }

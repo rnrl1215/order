@@ -1,6 +1,8 @@
 package com.barogo.order.dto;
 
+import lombok.Builder;
 import lombok.NonNull;
 
-public record MemberRequest(@NonNull String name, @NonNull String password) {
+@Builder
+public record MemberRequest(@NonNull String id, @NonNull String name, @NonNull String password) {
 }
