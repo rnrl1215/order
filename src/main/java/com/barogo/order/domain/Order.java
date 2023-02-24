@@ -28,13 +28,13 @@ public class Order extends BaseEntity{
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @CreationTimestamp
-    @Column(name = "delivered_at", nullable = false)
-    private LocalDateTime deliveredAt;
-
     @Enumerated(value = EnumType.STRING)
     @Column(name = "order_status")
     private OrderStatus orderStatus;
+
+    @CreationTimestamp
+    @Column(name = "order_at", nullable = false)
+    private LocalDateTime orderAt;
 
     // TODO: product_item 을 만들어 맵핑
     @Column(name = "product_name")
@@ -49,7 +49,6 @@ public class Order extends BaseEntity{
     public void setMember(Member member) {
         this.member = member;
     }
-
 
     @Builder
     public Order(OrderStatus orderStatus, String productName, Address address, Delivery delivery) {
@@ -69,5 +68,17 @@ public class Order extends BaseEntity{
         delivery.setOrder(order);
 
         return order;
+    }
+
+    public void updateStatusToReady() {
+        this.orderStatus = OrderStatus.READY;
+    }
+
+    public void updateStatusToCancel() {
+        this.orderStatus = OrderStatus.CANCEL;
+    }
+
+    public void updateStatusToDone() {
+        this.orderStatus = OrderStatus.DONE;
     }
 }

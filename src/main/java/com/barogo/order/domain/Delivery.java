@@ -2,10 +2,10 @@ package com.barogo.order.domain;
 
 import com.barogo.order.enums.DeliveryStatus;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,7 +25,15 @@ public class Delivery extends BaseEntity {
     @Column(name = "delivery_status", nullable = false)
     private DeliveryStatus status;
 
+    @CreationTimestamp
+    @Column(name = "delivered_at", nullable = false)
+    private LocalDateTime deliveredAt;
+
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public static Delivery createDelivery() {
+        return new Delivery();
     }
 }

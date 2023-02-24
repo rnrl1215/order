@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -35,8 +36,8 @@ class OrderServiceTest {
 
      @Test
      void fail() {
-         LocalDate from = LocalDate.of(2022,12,10);
-         LocalDate to = LocalDate.of(2022,12,14);
+         LocalDateTime from = LocalDateTime.of(2022,12,10,0,0,0);
+         LocalDateTime to = LocalDateTime.of(2022,12,14,23,59,59);
          Assertions.assertThatThrownBy(() -> orderService.checkMaximumPeriod(from, to))
                  .isInstanceOf(CustomException.class);
      }
