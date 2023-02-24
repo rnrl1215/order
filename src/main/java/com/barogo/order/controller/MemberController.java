@@ -22,7 +22,7 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseEntity signupMember(@Validated @RequestBody MemberSignupRequest memberSignupRequest) {
         memberService.createMember(memberSignupRequest);
-        return CustomResponseEntity.createCustomResponseEntity(null, "Requested signup service", HttpStatus.CREATED);
+        return CustomResponseEntity.createCustomResponseEntity("Requested signup service", HttpStatus.CREATED);
     }
 
     @PostMapping("/login")

@@ -10,7 +10,7 @@ import java.security.SecureRandom;
 import static com.barogo.order.exception.ErrorCode.FAIL_CREATE_PASSWORD;
 
 public class PasswordUtils {
-    public static boolean checkPassword(String password) {
+    public static boolean checkPasswordPattern(String password) {
         int constraintConditionCount = 0;
         boolean isSafePassword = false;
         if (!StringUtils.hasText(password) || password.length() <= 12) {

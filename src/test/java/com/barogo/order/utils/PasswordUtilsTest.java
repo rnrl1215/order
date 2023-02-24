@@ -5,9 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
 class PasswordUtilsTest {
 
     @Nested
@@ -130,7 +127,7 @@ class PasswordUtilsTest {
             String password = "Abcd@fghi12LMnop";
 
             // when
-            boolean isOk = PasswordUtils.checkPassword(password);
+            boolean isOk = PasswordUtils.checkPasswordPattern(password);
 
             // then
             Assertions.assertThat(isOk).isTrue();
@@ -142,7 +139,7 @@ class PasswordUtilsTest {
             String password = "AbcdfghiLMnop";
 
             // when
-            boolean isFalse = PasswordUtils.checkPassword(password);
+            boolean isFalse = PasswordUtils.checkPasswordPattern(password);
 
             // then
             Assertions.assertThat(isFalse).isFalse();

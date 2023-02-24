@@ -8,15 +8,13 @@ import com.barogo.order.repository.MemberRepository;
 import com.barogo.order.utils.JWTUtils;
 import com.barogo.order.utils.PasswordUtils;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 import static com.barogo.order.exception.ErrorCode.*;
 
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
@@ -42,7 +40,6 @@ public class MemberService {
         );
     }
 
-
     @Transactional
     public void createMember(MemberSignupRequest memberSignupRequest) {
         Member member = createMemberAndPassword(memberSignupRequest);
@@ -65,9 +62,8 @@ public class MemberService {
                 .build();
     }
 
-
     public void checkPassword(String password) {
-        boolean isSafePassword = PasswordUtils.checkPassword(password);
+        boolean isSafePassword = PasswordUtils.checkPasswordPattern(password);
         if (!isSafePassword) throw new CustomErrorCodeException(INVALID_PASSWORD);
     }
 
@@ -76,4 +72,5 @@ public class MemberService {
             throw new CustomErrorCodeException(EXIST_ID);
         });
     }
+
 }

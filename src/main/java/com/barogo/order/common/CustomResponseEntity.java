@@ -20,4 +20,9 @@ public class CustomResponseEntity<T> {
         CustomResponseEntity<T> customResponseEntity = new CustomResponseEntity<T>(data, message, status.value());
         return new ResponseEntity<CustomResponseEntity>(customResponseEntity, status);
     }
+
+    public static <T> ResponseEntity createCustomResponseEntity(String message, HttpStatus status) {
+        CustomResponseEntity<T> customResponseEntity = new CustomResponseEntity<T>(null, message, status.value());
+        return new ResponseEntity<CustomResponseEntity>(customResponseEntity, status);
+    }
 }
