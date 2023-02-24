@@ -29,8 +29,8 @@ class OrderServiceTest {
     class CheckMaximumPeriodTest {
      @Test
      void success() {
-         LocalDate from = LocalDate.of(2022,12,10);
-         LocalDate to = LocalDate.of(2022,12,13);
+         LocalDateTime from = LocalDateTime.of(2022,12,10, 0,0,0);
+         LocalDateTime to = LocalDateTime.of(2022,12,13,23,59,59);
          orderService.checkMaximumPeriod(from, to);
      }
 
