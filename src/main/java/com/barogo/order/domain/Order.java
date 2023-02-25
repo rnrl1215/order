@@ -1,12 +1,16 @@
 package com.barogo.order.domain;
 
 import com.barogo.order.enums.OrderStatus;
+import com.barogo.order.exception.CustomErrorCodeException;
+import com.barogo.order.exception.CustomException;
 import jakarta.persistence.*;
 import lombok.*;
 import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+
+import static com.barogo.order.exception.ErrorCode.UNABLE_UPDATE_ORDER;
 
 
 @Entity
@@ -27,7 +31,7 @@ public class Order extends BaseEntity{
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "order_status")
-    private OrderStatus orderStatus;
+    private OrderStatus orderStatus = OrderStatus.READY;
 
     @CreationTimestamp
     @Column(name = "order_at", nullable = false)
@@ -79,7 +83,14 @@ public class Order extends BaseEntity{
         this.orderStatus = OrderStatus.DONE;
     }
 
-    public void updateAddress(String address) {
+    public void updateAddress(String address)
+    {
         this.address = new Address(address);
+    }
+
+    public void isUpdatable() throws CustomException {
+        if (!this.orderStatus.equals(OrderStatus.READY)) {
+            throw new CustomErrorCodeException(UNABLE_UPDATE_ORDER);
+        }
     }
 }

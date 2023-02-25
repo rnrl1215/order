@@ -31,6 +31,7 @@ public class OrderService {
     @Transactional
     public Order updateOrder(Long orderId, OrderUpdateRequest orderUpdateRequest) throws CustomException{
         Order order = findOrderById(orderId);
+        order.isUpdatable();
         order.updateAddress(orderUpdateRequest.address());
         return order;
     }
