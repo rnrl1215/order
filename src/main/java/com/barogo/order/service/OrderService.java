@@ -46,6 +46,7 @@ public class OrderService {
 
     public void checkMaximumPeriod(LocalDateTime from, LocalDateTime to) throws CustomException {
         Period between = Period.between(from.toLocalDate(), to.toLocalDate());
+        int days = between.getDays();
         if (between.getDays() > MAX_SEARCH_PERIOD) {
             throw new CustomErrorCodeException(MAXIMUM_LOOKUP_PERIOD_EXCEEDED);
         }

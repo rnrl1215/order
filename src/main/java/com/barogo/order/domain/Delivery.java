@@ -23,6 +23,7 @@ public class Delivery extends BaseEntity {
     private Order order;
 
     @Column(name = "delivery_status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private DeliveryStatus status = DeliveryStatus.NONE;
 
     @CreationTimestamp

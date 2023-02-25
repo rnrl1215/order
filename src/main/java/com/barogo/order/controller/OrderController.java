@@ -24,6 +24,6 @@ public class OrderController {
     @GetMapping
     public ResponseEntity getOrders(DeliverySearchRequest deliverySearchRequest) {
         List<DeliveryResponse> ordersByPeriod = orderService.getOrdersByPeriod(deliverySearchRequest.userId(), deliverySearchRequest.from(), deliverySearchRequest.to());
-        return CustomResponseEntity.createCustomResponseEntity(ordersByPeriod, "Requested signup service", HttpStatus.CREATED);
+        return CustomResponseEntity.createCustomResponseEntity(ordersByPeriod, "Requested searching order service", HttpStatus.CREATED);
     }
 }
