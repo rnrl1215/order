@@ -23,7 +23,7 @@ public class Delivery extends BaseEntity {
     private Order order;
 
     @Column(name = "delivery_status", nullable = false)
-    private DeliveryStatus status;
+    private DeliveryStatus status = DeliveryStatus.NONE;
 
     @CreationTimestamp
     @Column(name = "delivered_at", nullable = false)

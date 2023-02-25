@@ -1,4 +1,4 @@
-package com.barogo.order.model;
+package com.barogo.order.fixture;
 
 import com.barogo.order.domain.Member;
 
@@ -9,7 +9,8 @@ public class MemberFixture {
 
         return Member.builder()
                 .password("c600eadd1ee4b314338e68f5603f525bea254c9899de6136f60b4f48c11533ff")
-                .id("test1")
+                .id("test0")
+                .name("test0")
                 .salt(salt)
                 .build();
     }

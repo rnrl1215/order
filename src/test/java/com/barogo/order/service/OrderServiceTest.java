@@ -1,8 +1,13 @@
 package com.barogo.order.service;
 
+import com.barogo.order.domain.Member;
+import com.barogo.order.domain.Order;
 import com.barogo.order.exception.CustomException;
+import com.barogo.order.fixture.MemberFixture;
+import com.barogo.order.fixture.OrderFixture;
 import com.barogo.order.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

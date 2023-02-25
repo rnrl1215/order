@@ -5,16 +5,14 @@ import com.barogo.order.dto.DeliveryResponse;
 import com.barogo.order.exception.CustomErrorCodeException;
 import com.barogo.order.exception.CustomException;
 import com.barogo.order.repository.MemberRepository;
-import com.barogo.order.repository.OrderRepositoryCustom;
+import com.barogo.order.repository.OrderRepository;
+import com.barogo.order.repository.OrderRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +24,7 @@ import static com.barogo.order.exception.ErrorCode.MAXIMUM_LOOKUP_PERIOD_EXCEEDE
 @Service
 public class OrderService {
     private final MemberRepository memberRepository;
-    private final OrderRepositoryCustom orderRepositoryCustom;
+    private final OrderRepository orderRepositoryCustom;
 
     public List<DeliveryResponse> getOrdersByPeriod(String userId, LocalDateTime from, LocalDateTime to) {
         checkMaximumPeriod(from, to);
