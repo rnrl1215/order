@@ -2,6 +2,7 @@ package com.barogo.order.service;
 
 import com.barogo.order.domain.Order;
 import com.barogo.order.dto.DeliveryResponse;
+import com.barogo.order.dto.OrderUpdateRequest;
 import com.barogo.order.exception.CustomErrorCodeException;
 import com.barogo.order.exception.CustomException;
 import com.barogo.order.repository.MemberRepository;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static com.barogo.order.constants.OrderConstant.MAX_SEARCH_PERIOD;
 import static com.barogo.order.exception.ErrorCode.MAXIMUM_LOOKUP_PERIOD_EXCEEDED;
+import static com.barogo.order.exception.ErrorCode.NOT_EXIST_ORDER;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -25,6 +27,22 @@ import static com.barogo.order.exception.ErrorCode.MAXIMUM_LOOKUP_PERIOD_EXCEEDE
 public class OrderService {
     private final MemberRepository memberRepository;
     private final OrderRepository orderRepositoryCustom;
+
+    @Transactional
+    public Order updateOrder(Long orderId, OrderUpdateRequest orderUpdateRequest) throws CustomException{
+        Order order = findOrderById(orderId);
+        order.updateAddress(orderUpdateRequest.address());
+        return order;
+    }
+
+    private Order findOrderById(Long orderId) {
+        Order foundOrder = orderRepositoryCustom.findById(orderId)
+                .orElseThrow(() -> {
+                    throw new CustomErrorCodeException(NOT_EXIST_ORDER);
+                });
+
+        return foundOrder;
+    }
 
     public List<DeliveryResponse> getOrdersByPeriod(String userId, LocalDateTime from, LocalDateTime to) {
         checkMaximumPeriod(from, to);

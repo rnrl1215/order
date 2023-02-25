@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "delivery")
+@ToString
 public class Delivery extends BaseEntity {
 
     @Id

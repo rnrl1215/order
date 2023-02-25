@@ -2,10 +2,7 @@ package com.barogo.order.domain;
 
 import com.barogo.order.converter.SaltAttributeConverter;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.aspectj.weaver.ast.Or;
 
 import java.io.Serializable;
@@ -17,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "member")
+@ToString
 public class Member implements Serializable {
 
     @Id

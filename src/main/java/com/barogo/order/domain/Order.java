@@ -2,10 +2,7 @@ package com.barogo.order.domain;
 
 import com.barogo.order.enums.OrderStatus;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "orders")
+@ToString
 public class Order extends BaseEntity{
 
     @Id
@@ -79,5 +77,9 @@ public class Order extends BaseEntity{
 
     public void updateStatusToDone() {
         this.orderStatus = OrderStatus.DONE;
+    }
+
+    public void updateAddress(String address) {
+        this.address = new Address(address);
     }
 }
